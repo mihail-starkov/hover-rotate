@@ -31,3 +31,5 @@
 &nbsp;&nbsp;&nbsp;&nbsp;`angle: 10,`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;передан коэффициент для изменения угла наклона<br>
 `});`
 
+### [DEMO](https://mihail-starkov.github.io/hover-rotate/)
+
