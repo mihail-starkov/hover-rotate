@@ -28,6 +28,6 @@
 Запуск скрипта с новыми настройками:<br>
 `window.onload = ()=> hoverRotate.init({`<br>
 &nbsp;&nbsp;&nbsp;&nbsp;`cardClass: 'wrap-card',`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;передан новый класс для обертки элемента<br>
-&nbsp;&nbsp;&nbsp;&nbsp;`angle: 10,`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;передан коэфициент для изменения угла наклона<br>
+&nbsp;&nbsp;&nbsp;&nbsp;`angle: 10,`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;&nbsp;передан коэффициент для изменения угла наклона<br>
 `});`
 
