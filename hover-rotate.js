@@ -2,10 +2,10 @@
 /**
  * Объект HoverRotate
  * @property {{}} settings DTO объект с настройками скрипта
- * @method
- * @method
- * @method
- * @method
+ * @method init Инициализация скрипта
+ * @method isSoughtElement Метод определяющий, на нужном ли элементе произошло событие
+ * @method startRotate Метод поворота элемента
+ * @method stopRotate Метод отмены поворота и возврата в исходное состояние
  */
 const hoverRotate = {
   /**
@@ -13,13 +13,15 @@ const hoverRotate = {
    * @property {string} cardClass - CSS класс контейнера с элементами
    * @property {string} cardClass - CSS класс обертка элемента
    * @property {string} cardItemClass - CSS класс элемент
-   * @property {number} angle - угол наклона элемента
+   * @property {number} angle - коэффициент изменения угла наклона элемента
+   * @property {boolean} animateRotate - включение/отключение анимации поворота
    */
   settings: {
     cardsClass: 'cards',
     cardClass: 'card',
     cardItemClass: 'card-item',
     angle: 5,
+    animateRotate: true,
   },
   /**
    * Инициализация скрипта
@@ -31,16 +33,17 @@ const hoverRotate = {
     const cards = document.querySelector(`.${this.settings.cardsClass}`);
     
     cards.addEventListener('mousemove', (e) => {
-      this.startRotate(e)
+      this.animateRotateStart(e)
     });
     cards.addEventListener('mouseout', (e) => {
-      this.stopRotate(e)
+      this.animateRotateStop(e)
     });
   },
   /**
    * Метод определяющий, на нужном ли элементе произошло событие
    * @param {event} e событие, которое произошло на элементе
-   * @return {HTMLElement} возвращает нужный элемент, на котором произошло событие
+   * @return {HTMLElement || boolean} возвращает нужный элемент,
+   * на котором произошло событие либо false если нет нужного элемента
    */
   isSoughtElement(e) {
     if (e.target.className === this.settings.cardItemClass) {
@@ -53,11 +56,11 @@ const hoverRotate = {
   },
   /**
    * Метод поворота элемента
-   * @param {event} e событие полученное обработчиком
+   * @param {Event} e событие полученное обработчиком
    */
-  startRotate(e) {
+  animateRotateStart(e) {
     const card = this.isSoughtElement(e);
-    if (card) {
+    if (card && this.settings.animateRotate) {
       let halfHeight = card.offsetHeight / 2,
           halfWidth  = card.offsetWidth / 2;
       card.style.transform = `
@@ -67,14 +70,13 @@ const hoverRotate = {
   },
   /**
    * Метод отмены поворота и возврата в исходное состояние
-   * @param {event} e событие полученное обработчиком
+   * @param {Event} e событие полученное обработчиком
    */
-  stopRotate(e) {
+  animateRotateStop(e) {
     const card = this.isSoughtElement(e);
-    if (card) {
+    if (card && this.settings.animateRotate) {
       card.style.transform = 'rotate(0)';
     }
   },
 };
-
 hoverRotate.init();
